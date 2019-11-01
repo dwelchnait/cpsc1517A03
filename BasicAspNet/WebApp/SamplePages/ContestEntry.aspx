@@ -17,6 +17,87 @@
         </div>
     </div>
   
+    <%-- Validation controls --%>
+    <asp:RequiredFieldValidator ID="RequiredFirstName" runat="server" 
+        ErrorMessage="First name is required" Display="None"
+         ControlToValidate="FirstName" ForeColor="#990000"
+         SetFocusOnError ="true"> 
+    </asp:RequiredFieldValidator>
+        <asp:RequiredFieldValidator ID="RequiredLastName" runat="server" 
+        ErrorMessage="Last name is required" Display="None"
+         ControlToValidate="LastName" ForeColor="#990000"
+         SetFocusOnError ="true"> 
+    </asp:RequiredFieldValidator>
+    <asp:RequiredFieldValidator ID="RequiredStreetAddress1" runat="server" 
+        ErrorMessage="Street Address 1 is required" Display="None"
+         ControlToValidate="StreetAddress1" ForeColor="#990000"
+         SetFocusOnError ="true"> 
+    </asp:RequiredFieldValidator>
+    <asp:RequiredFieldValidator ID="RequiredCity" runat="server" 
+        ErrorMessage="City is required" Display="None"
+         ControlToValidate="City" ForeColor="#990000"
+         SetFocusOnError ="true"> 
+    </asp:RequiredFieldValidator>
+    <asp:RequiredFieldValidator ID="RequiredPostalCode" runat="server" 
+        ErrorMessage="Postal Code is required" Display="None"
+         ControlToValidate="PostalCode" ForeColor="#990000"
+         SetFocusOnError ="true"> 
+    </asp:RequiredFieldValidator>
+    <asp:RegularExpressionValidator ID="RegExPostalCode" runat="server" 
+        ErrorMessage="Invalid postal code format (T6Y7U0)" Display="None"
+        ControlToValidate="PostalCode" ForeColor="#990000"
+        SetFocusOnError ="true" 
+        ValidationExpression="[a-zA-Z][0-9][a-zA-Z][0-9][a-zA-Z][0-9]">
+    </asp:RegularExpressionValidator>
+    <asp:RequiredFieldValidator ID="RequiredEmailAddress" runat="server" 
+        ErrorMessage="Email is required" Display="None"
+         ControlToValidate="EmailAddress" ForeColor="#990000"
+         SetFocusOnError ="true"> 
+    </asp:RequiredFieldValidator>
+    <asp:RegularExpressionValidator ID="RegExEmailAddress" runat="server" 
+        ErrorMessage="Invalid email format" Display="None"
+        ControlToValidate="EmailAddress" ForeColor="#990000"
+        SetFocusOnError ="true" 
+        ValidationExpression="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$">
+    </asp:RegularExpressionValidator>
+    <asp:RequiredFieldValidator ID="RequiredCheckAnswer" runat="server" 
+        ErrorMessage="A skill testing answer is required" Display="None"
+         ControlToValidate="CheckAnswer" ForeColor="#990000"
+         SetFocusOnError ="true"> 
+    </asp:RequiredFieldValidator>
+<%--    <asp:CompareValidator ID="CompareCheckAnswer" runat="server" 
+        ErrorMessage="Bad Check Answer: DataType validation" Display ="None"
+        ForeColor="#990000" SetFocusOnError="true"
+        ControlToValidate="CheckAnswer" Operator="DataTypeCheck" Type="Integer">
+    </asp:CompareValidator>--%>
+    <asp:CompareValidator ID="CompareCheckAnswer" runat="server" 
+        ErrorMessage="Bad Check Answer: Static Value validation" Display ="None"
+        ForeColor="#990000" SetFocusOnError="true"
+        ControlToValidate="CheckAnswer" Operator="Equal" ValueToCompare ="15" 
+            Type="Integer">
+    </asp:CompareValidator>
+<%--    <asp:CompareValidator ID="CompareCheckAnswer" runat="server" 
+        ErrorMessage="Bad Check Answer: Compare to another field validation" Display ="None"
+        ForeColor="#990000" SetFocusOnError="true"
+        ControlToValidate="CheckAnswer" Operator="Equal" ControlToCompare ="StreetAddress2" 
+            Type="Integer">
+    </asp:CompareValidator>--%>
+
+    <%-- sample of a range test using StreetAddress2 --%>
+    <asp:RangeValidator ID="RangeSample" runat="server" 
+        ErrorMessage="Using street address 2 for a sample range validation"
+         Display="None" ForeColor="#990000" SetFocusOnError="true"
+         ControlToValidate="StreetAddress2" MinimumValue="0" MaximumValue="100"
+         Type="Integer">
+    </asp:RangeValidator>
+
+    <%-- Display validation errors --%>
+    <div class="row">
+        <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
+           HeaderText="Please correct the following concerns and resubmit" 
+           CssClass="alert alert-danger"/>
+    </div>
+    
     <div class="row">
         <div class ="col-md-6">
             <fieldset class="form-horizontal">
@@ -26,7 +107,6 @@
                      AssociatedControlID="FirstName"></asp:Label>
                 <asp:TextBox ID="FirstName" runat="server" 
                     ToolTip="Enter your first name." MaxLength="25"></asp:TextBox> 
-                  
                  <asp:Label ID="Label6" runat="server" Text="Last Name"
                      AssociatedControlID="LastName"></asp:Label>
                 <asp:TextBox ID="LastName" runat="server" 
@@ -85,10 +165,13 @@
         <div class="col-md-6">   
             <div class="col-md-offset-2">
                 <p>
-                    <asp:Button ID="Submit" runat="server" Text="Submit" />&nbsp;&nbsp;
-                    <asp:Button ID="Clear" runat="server" Text="Clear" CausesValidation="true"  />
+                    <asp:Button ID="Submit" runat="server" Text="Submit" OnClick="Submit_Click" />&nbsp;&nbsp;
+                    <asp:Button ID="Clear" runat="server" Text="Clear" CausesValidation="true" OnClick="Clear_Click"  />
                 </p>
-                <asp:Label ID="Message" runat="server" ></asp:Label><br />
+                <asp:Label ID="Message" runat="server" ></asp:Label><br /><br />
+                <asp:GridView ID="EntryList" runat="server">
+
+                </asp:GridView>
             
             </div>
         </div>
