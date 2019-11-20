@@ -36,5 +36,9 @@ namespace NorthwindSystem.DAL
         public DbSet<Product> Products { get; set; }
         public DbSet<Region> Regions { get; set; }
         public DbSet<Category> Categories { get; set; }
+        #region Filter search demo
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Territory> Territories { get; set; }
+        #endregion
     }
 }
