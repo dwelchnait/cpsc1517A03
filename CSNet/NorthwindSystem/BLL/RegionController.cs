@@ -48,29 +48,6 @@ namespace NorthwindSystem.BLL
             }
 
         }
-        #region Filter search demo
-        public List<Region> Region_List()
-        {
-            //connect to the context class that will handle the data request
-            //most of CRUD requires using a transaction
-            //To ensure that your data request is handled as a transaction
-            //   we will encase all controller action within a transaction
-            using (var context = new NorthwindContext())
-            {
-                //transaction code
-                return context.Regions.ToList();
-            }
 
-        }
-        public Region Region_Get(int regionid)
-        {
-            //return the record from the database via the DbSet collection
-            //where the pkey matches the supplied value
-            using (var context = new NorthwindContext())
-            {
-                return context.Regions.Find(regionid);
-            }
-        }
-        #endregion
     }
 }

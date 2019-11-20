@@ -26,16 +26,6 @@ namespace NorthwindSystem.BLL
             }
 
         }
-        public List<Category> Category_List()
-        {
-            //need to connect to the Context class
-            //this connection will be done in a transaction coding group
-            using (var context = new NorthwindContext())
-            {
-                //via EnityFrame, make a request for all records,
-                //all attributes from the specified DbSet property
-                return context.Categories.ToList();
-            }
-        }
+
     }
 }
