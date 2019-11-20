@@ -10,7 +10,7 @@ using NorthwindSystem.Data;
 using NorthwindSystem.BLL;
 #endregion
 
-namespace WebApp.NorthwindPages
+namespace WebApp.SamplePages
 {
     public partial class FilterSearches : System.Web.UI.Page
     {

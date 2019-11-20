@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FilterSearches.aspx.cs" Inherits="WebApp.NorthwindPages.FilterSearches" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FilterSearches.aspx.cs" Inherits="WebApp.SamplePages.FilterSearches" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -126,12 +126,12 @@
                     </blockquote>
                     <asp:Label ID="Label7" runat="server" Text="Supplier:"></asp:Label>
                     <asp:DropDownList ID="SupplierListV5" runat="server"></asp:DropDownList>
-                    <asp:Button ID="FindCategories" runat="server" Text="Categories?" OnClick="FindCategories_Click" />
+                    <asp:Button ID="FindCategories" runat="server" Text="Categories?"  />
                     <asp:Label ID="label8" runat="server" Text="Categories:"></asp:Label>
                     <asp:DropDownList ID="CategoryListV5" runat="server"></asp:DropDownList>
                     <asp:Button ID="FindSupplierCategoryProducts" runat="server" Text="Products?" 
-                        OnClick="FindSupplierCategoryProducts_Click"  Enabled="false" />
-                     <asp:Button ID="Reset" runat="server" Text="Reset" OnClick="Reset_Click"  />
+                          Enabled="false" />
+                     <asp:Button ID="Reset" runat="server" Text="Reset"  />
                     <br />
                     <br />
                     <asp:GridView ID="ProductsGridViewV5" runat="server">

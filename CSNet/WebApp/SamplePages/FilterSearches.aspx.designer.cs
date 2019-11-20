@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApp.NorthwindPages {
+namespace WebApp.SamplePages {
     
     
     public partial class FilterSearches {
