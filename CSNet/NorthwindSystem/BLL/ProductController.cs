@@ -64,6 +64,7 @@ namespace NorthwindSystem.BLL
             //start a transaction
             using (var context = new NorthwindContext())
             {
+
                 //Step one
                 //Stage the data for execution by the commit statement
                 //Staging is done in local memory
@@ -72,6 +73,10 @@ namespace NorthwindSystem.BLL
                 context.Products.Add(item);
 
                 //commit your staged record to the database
+                //IF there is ANY entity validation annotation, it will
+                //    be executed during the .SaveChanges() processing
+                //If any entity validation error is discovered, the message
+                //    is returned AND the commit is ABORTED
                 //if the commit command is successful, then the new
                 //    identity value will exist in your data instance
                 //if the commit command is NOT successful, the transaction
