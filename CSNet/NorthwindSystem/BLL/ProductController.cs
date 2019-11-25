@@ -78,7 +78,7 @@ namespace NorthwindSystem.BLL
                 //    is ROLLBACK
                 context.SaveChanges();
 
-                //optinally
+                //optionally
                 //you may decide to return the new identity value to the 
                 //   web page
                 //if you decide to return the value, then the method has a

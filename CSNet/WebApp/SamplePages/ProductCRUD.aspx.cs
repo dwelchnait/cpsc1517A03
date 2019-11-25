@@ -1,11 +1,14 @@
-﻿using NorthwindSystem.BLL;
-using NorthwindSystem.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+
+#region Additional Namespaces
+using NorthwindSystem.BLL;
+using NorthwindSystem.Data;
+#endregion
 
 namespace WebApp.NorthwindPages
 {
@@ -207,6 +210,122 @@ namespace WebApp.NorthwindPages
                     errormsgs.Add(GetInnerException(ex).ToString());
                     LoadMessageDisplay(errormsgs, "alert alert-danger");
                 }
+            }
+        }
+
+        protected void AddProduct_Click(object sender, EventArgs e)
+        {
+            //check the page validation
+            if (Page.IsValid)
+            {
+                //event code validation that was not accomplished on 
+                //   the web form
+                //example
+                // Assume that the CategoryID is required
+                if (CategoryList.SelectedIndex == 0)
+                {
+                    errormsgs.Add("Category is required.");
+                }
+                if (QuantityPerUnit.Text.Length > 20)
+                {
+                    errormsgs.Add("Quantity per Unit is limited to 20 characters");
+                }
+
+                //check if click event validation is good
+                if (errormsgs.Count > 0)
+                {
+                    LoadMessageDisplay(errormsgs, "alert alert-info");
+                }
+                else
+                {
+                    //assume that the data is validation to our knowledge
+                    try
+                    {
+                        //standard add to a database
+                        //connect to the appropriate controller 
+                        ProductController sysmgr = new ProductController();
+                        //create and load an instance of the entity record
+                        //  since there was no constructor placed in the
+                        //  entity, when one creates the instance the
+                        //  default system constructor will be used
+                        Product item = new Product();
+                        //what about ProductiD??
+                        //   since ProductID is an identity field it does NOT
+                        //   need to be loaded into the new instance
+                        item.ProductName = ProductName.Text.Trim();
+                        if (CategoryList.SelectedIndex == 0)
+                        {
+                            item.CategoryID = null;
+                        }
+                        else
+                        {
+                            item.CategoryID = int.Parse(CategoryList.SelectedValue);
+                        }
+                        if (SupplierList.SelectedIndex == 0)
+                        {
+                            item.SupplierID = null;
+                        }
+                        else
+                        {
+                            item.SupplierID = int.Parse(SupplierList.SelectedValue);
+                        }
+                        item.QuantityPerUnit =
+                            string.IsNullOrEmpty(QuantityPerUnit.Text) ? null : QuantityPerUnit.Text;
+                        if (string.IsNullOrEmpty(UnitPrice.Text))
+                        {
+                            item.UnitPrice = null;
+                        }
+                        else
+                        {
+                            item.UnitPrice = decimal.Parse(UnitPrice.Text);
+                        }
+                        if (string.IsNullOrEmpty(UnitsInStock.Text))
+                        {
+                            item.UnitsInStock = null;
+                        }
+                        else
+                        {
+                            item.UnitsInStock = Int16.Parse(UnitsInStock.Text);
+                        }
+                        if (string.IsNullOrEmpty(UnitsOnOrder.Text))
+                        {
+                            item.UnitsOnOrder = null;
+                        }
+                        else
+                        {
+                            item.UnitsOnOrder = Int16.Parse(UnitsOnOrder.Text);
+                        }
+                        if (string.IsNullOrEmpty(ReorderLevel.Text))
+                        {
+                            item.ReorderLevel = null;
+                        }
+                        else
+                        {
+                            item.ReorderLevel = Int16.Parse(ReorderLevel.Text);
+                        }
+                        //what about Discontinue??
+                        item.Discontinued = false;
+                        //issue the BLL call
+                        int newProductID = sysmgr.Products_Add(item);
+                        //give feedback
+                        //if you get to execute the following code, it means
+                        //   that the product has been successfully added
+                        //   to the database
+                        ProductID.Text = newProductID.ToString();
+                        errormsgs.Add("Product has been added");
+                        LoadMessageDisplay(errormsgs, "alert alert-success");
+                        //is there any other controls on the form that need to be refreshed
+                        BindProductList();  //by default, list will be at index 0
+                        ProductList.SelectedValue = ProductID.Text;
+
+                    }
+                    catch(Exception ex)
+                    {
+                        errormsgs.Add(GetInnerException(ex).ToString());
+                        LoadMessageDisplay(errormsgs, "alert alert-danger");
+                    }
+                }
+                
             }
         }
     }
