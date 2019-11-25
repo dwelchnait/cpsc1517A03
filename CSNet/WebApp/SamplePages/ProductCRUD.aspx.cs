@@ -356,5 +356,15 @@ namespace WebApp.NorthwindPages
                 
             }
         }
+
+        protected void UpdateProduct_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void RemoveProduct_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
